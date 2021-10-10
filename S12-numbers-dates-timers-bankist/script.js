@@ -309,3 +309,26 @@ console.log((2.7).toFixed(0)); // Return string
 console.log((3).toFixed(5));
 console.log((2.453).toFixed(2));
 console.log(+(2.453).toFixed(2)); // Use + to make number
+
+// Reminder operator
+console.log(5 % 2);
+console.log(8 % 3);
+console.log(6 % 2);
+
+const isEven = (n) => n % 2 === 0;
+console.log(isEven(9));
+
+labelBalance.addEventListener("click", () => {
+    [
+        ...document
+        .querySelectorAll(".movements__row")
+        .forEach(function(row, i) {
+            if (i % 2 === 0) {
+                row.style.backgroundColor = "orangered";
+            }
+            if (i % 3 === 0) {
+                row.style.backgroundColor = "blue";
+            }
+        }),
+    ];
+});
