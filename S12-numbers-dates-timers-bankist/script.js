@@ -332,3 +332,28 @@ labelBalance.addEventListener("click", () => {
         }),
     ];
 });
+
+// Big int
+console.log(2 ** 53 - 1); // Biggest number JS can safely represent
+console.log(Number.MAX_SAFE_INTEGER);
+
+console.log(2 ** 53 + 1); // This onwards = unsafe number
+console.log(2 ** 53 + 1);
+console.log(2 ** 53 + 2);
+console.log(2 ** 53 + 3);
+console.log(2 ** 53 + 4);
+console.log(2 ** 53 + 5);
+
+// console.log(9949944757625356373332738229293233n);
+
+console.log(BigInt(9949944757625356373332738229293233));
+
+// console.log(9949944757625356373332738229293233n * 10000n);
+// const huge = 226627738493309845927645237
+// const num = 23
+// console.log(hug * bigInt(num))
+
+// console.log(20n > 15) This is ok
+// console.log(20n === 20) This shows false because 20n is bigInt
+
+// console.log(10n / 3n); is 3n which is closest bigInt
