@@ -94,7 +94,7 @@ const displayMovements = function(movements, sort = false) {
         <div class="movements__type movements__type--${type}">${
             i + 1
         } ${type}</div>
-        <div class="movements__value">${mov}€</div>
+        <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
 
@@ -111,12 +111,12 @@ const calcDisplaySummary = function(acc) {
     const incomes = acc.movements
         .filter((mov) => mov > 0)
         .reduce((acc, mov) => acc + mov, 0);
-    labelSumIn.textContent = `${incomes}€`;
+    labelSumIn.textContent = `${incomes.toFixed(2)}€`;
 
     const out = acc.movements
         .filter((mov) => mov < 0)
         .reduce((acc, mov) => acc + mov, 0);
-    labelSumOut.textContent = `${Math.abs(out)}€`;
+    labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
 
     const interest = acc.movements
         .filter((mov) => mov > 0)
@@ -126,7 +126,7 @@ const calcDisplaySummary = function(acc) {
             return int >= 1;
         })
         .reduce((acc, int) => acc + int, 0);
-    labelSumInterest.textContent = `${interest}€`;
+    labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 const createUsernames = function(accs) {
@@ -206,7 +206,7 @@ btnTransfer.addEventListener("click", function(e) {
 btnLoan.addEventListener("click", function(e) {
     e.preventDefault();
 
-    const amount = +inputLoanAmount.values;
+    const amount = Math.floor(inputLoanAmount.values);
 
     if (
         amount > 0 &&
@@ -281,3 +281,31 @@ console.log(Number.isFinite(20));
 console.log(Number.isFinite("20"));
 console.log(Number.isFinite(+"23N"));
 console.log(Number.isFinite(0.4));
+
+// Math and Rounding
+console.log(Math.sqrt(25));
+console.log(25 ** (1 / 2));
+console.log(25 ** (1 / 3)); // Cubic root
+console.log(Math.max(5, 18, 39, 3, 11, 2));
+console.log(Math.min(5, 18, 39, 3, 11, 2));
+console.log(Math.PI);
+console.log(Math.PI * Number.parseFloat("10px") ** 2); // Calculating the area
+console.log(Math.trunc(Math.random() * 6 + 1));
+
+const randomInt = (min, max) =>
+    Math.trunc(Math.random() * (max - min) + 1 + min);
+
+console.log(randomInt(10, 20));
+
+console.log(Math.trunc(23.3));
+console.log(Math.round(23.8));
+console.log(Math.ceil(23.6));
+console.log(Math.floor(23.9));
+
+console.log(Math.trunc(-23.3));
+console.log(Math.floor(-23.3)); // Better than trunc
+
+console.log((2.7).toFixed(0)); // Return string
+console.log((3).toFixed(5));
+console.log((2.453).toFixed(2));
+console.log(+(2.453).toFixed(2)); // Use + to make number
