@@ -357,3 +357,31 @@ console.log(BigInt(9949944757625356373332738229293233));
 // console.log(20n === 20) This shows false because 20n is bigInt
 
 // console.log(10n / 3n); is 3n which is closest bigInt
+
+// Dates and Time
+// Create a Date - There are 4 ways
+const now = new Date(); // New date constructor
+console.log(now);
+
+console.log(new Date("Aug 02 2020 18: 05: 41"));
+
+console.log(new Date(2037, 10, 19, 15, 23, 5));
+console.log(new Date(2037, 8, 19));
+
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log(future.getDate());
+console.log(future.getDay());
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString());
+console.log(future.getTime());
+
+console.log(Date.now());
+console.log(new Date(1633887199345));
