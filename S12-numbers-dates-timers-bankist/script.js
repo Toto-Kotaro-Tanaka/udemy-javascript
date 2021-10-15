@@ -22,8 +22,8 @@ const account1 = {
         "2020-04-01T10:17:24.185Z",
         "2020-05-08T14:11:59.604Z",
         "2020-05-27T17:01:17.194Z",
-        "2020-07-11T23:36:17.929Z",
-        "2020-07-12T10:51:36.790Z",
+        "2021-10-11T23:36:17.929Z",
+        "2021-10-14T10:51:36.790Z",
     ],
     currency: "EUR",
     locale: "pt-PT", // de-DE
@@ -81,6 +81,24 @@ const inputClosePin = document.querySelector(".form__input--pin");
 /////////////////////////////////////////////////
 // Functions
 
+const formatMovementDate = function(date) {
+    const calcDisplayPassed = (date1, date2) =>
+        Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+
+    const daysPassed = calcDisplayPassed(new Date(), date);
+    console.log(daysPassed);
+
+    if (daysPassed === 0) return "Today";
+    if (daysPassed === 1) return "Yesterday";
+    if (daysPassed <= 7) return `${daysPassed} days ago`;
+    else {
+        const day = `${date.getDate()}`.padStart(2, 0);
+        const month = `${date.getMonth() + 1}`.padStart(2, 0);
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
+};
+
 const displayMovements = function(acc, sort = false) {
     containerMovements.innerHTML = "";
 
@@ -92,11 +110,7 @@ const displayMovements = function(acc, sort = false) {
         const type = mov > 0 ? "deposit" : "withdrawal";
 
         const dateForAccount = new Date(acc.movementsDates[i]);
-        const day = `${dateForAccount.getDate()}`.padStart(2, 0);
-        const month = `${dateForAccount.getMonth() + 1}`.padStart(2, 0);
-        const year = dateForAccount.getFullYear();
-
-        const displayDate = `${day}/${month}/${year}`;
+        const displayDate = formatMovementDate(dateForAccount);
 
         const html = `
       <div class="movements__row">
@@ -366,19 +380,19 @@ labelBalance.addEventListener("click", () => {
 });
 
 // Big int
-console.log(2 ** 53 - 1); // Biggest number JS can safely represent
-console.log(Number.MAX_SAFE_INTEGER);
+// console.log(2 ** 53 - 1); // Biggest number JS can safely represent
+// console.log(Number.MAX_SAFE_INTEGER);
 
-console.log(2 ** 53 + 1); // This onwards = unsafe number
-console.log(2 ** 53 + 1);
-console.log(2 ** 53 + 2);
-console.log(2 ** 53 + 3);
-console.log(2 ** 53 + 4);
-console.log(2 ** 53 + 5);
+// console.log(2 ** 53 + 1); // This onwards = unsafe number
+// console.log(2 ** 53 + 1);
+// console.log(2 ** 53 + 2);
+// console.log(2 ** 53 + 3);
+// console.log(2 ** 53 + 4);
+// console.log(2 ** 53 + 5);
 
 // console.log(9949944757625356373332738229293233n);
 
-console.log(BigInt(9949944757625356373332738229293233));
+// console.log(BigInt(9949944757625356373332738229293233));
 
 // console.log(9949944757625356373332738229293233n * 10000n);
 // const huge = 226627738493309845927645237
@@ -392,28 +406,37 @@ console.log(BigInt(9949944757625356373332738229293233));
 
 // Dates and Time
 // Create a Date - There are 4 ways
-const now = new Date(); // New date constructor
-console.log(now);
+// const now = new Date(); // New date constructor
+// console.log(now);
 
-console.log(new Date("Aug 02 2020 18: 05: 41"));
+// console.log(new Date("Aug 02 2020 18: 05: 41"));
 
-console.log(new Date(2037, 10, 19, 15, 23, 5));
-console.log(new Date(2037, 8, 19));
+// console.log(new Date(2037, 10, 19, 15, 23, 5));
+// console.log(new Date(2037, 8, 19));
 
-console.log(new Date(0));
-console.log(new Date(3 * 24 * 60 * 60 * 1000));
+// console.log(new Date(0));
+// console.log(new Date(3 * 24 * 60 * 60 * 1000));
 
-const future = new Date(2037, 10, 19, 15, 23);
-console.log(future);
-console.log(future.getFullYear());
-console.log(future.getMonth());
-console.log(future.getDate());
-console.log(future.getDay());
-console.log(future.getHours());
-console.log(future.getMinutes());
-console.log(future.getSeconds());
-console.log(future.toISOString());
-console.log(future.getTime());
+// const future = new Date(2037, 10, 19, 15, 23);
+// console.log(future);
+// console.log(future.getFullYear());
+// console.log(future.getMonth());
+// console.log(future.getDate());
+// console.log(future.getDay());
+// console.log(future.getHours());
+// console.log(future.getMinutes());
+// console.log(future.getSeconds());
+// console.log(future.toISOString());
+// console.log(future.getTime());
 
-console.log(Date.now());
-console.log(new Date(1633887199345));
+// console.log(Date.now());
+// console.log(new Date(1633887199345));
+
+// const future = new Date(2037, 10, 19, 15, 23);
+// console.log(Number(future));
+
+// const calcDaysPassed = (date1, date2) =>
+//     Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+
+// const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14));
+// console.log(days1);
