@@ -197,14 +197,39 @@ const updateUI = function(acc) {
     calcDisplaySummary(acc);
 };
 
+const startLouOutTimer = function() {
+    const tick = function() {
+        const min = String(Math.trunc(logOutTime / 60)).padStart(2, 0);
+        const sec = String(Math.trunc(logOutTime % 60)).padStart(2, 0);
+        // In each call, print the remaining time to UI
+        labelTimer.textContent = `${min}:${sec}`;
+
+        // When 0 second, stop timer and logout user
+        if (logOutTime === 0) {
+            clearInterval(timer);
+            labelWelcome.textContent = "Login to get started";
+            containerApp.style.opacity = 0;
+        }
+        // Decrese 1s
+        logOutTime--;
+    };
+    // Set time to 5 min
+    let logOutTime = 50;
+
+    // Call the timer every second
+    tick();
+    const timer = setInterval(tick, 1000);
+    return timer;
+};
+
 ///////////////////////////////////////
 // Event handlers
-let currentAccount;
+let currentAccount, timer;
 
 // Fake always logged in
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 100;
 
 btnLogin.addEventListener("click", function(e) {
     // Prevent form from submitting
@@ -255,6 +280,10 @@ btnLogin.addEventListener("click", function(e) {
         inputLoginUsername.value = inputLoginPin.value = "";
         inputLoginPin.blur();
 
+        // Timer
+        if (timer) clearInterval(timer);
+        timer = startLouOutTimer();
+
         // Update UI
         updateUI(currentAccount);
     }
@@ -284,6 +313,10 @@ btnTransfer.addEventListener("click", function(e) {
 
         // Update UI
         updateUI(currentAccount);
+
+        // Reset timer
+        clearInterval(timer);
+        timer = startLouOutTimer();
     }
 });
 
