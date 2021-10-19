@@ -139,3 +139,12 @@ btnScrollTo.addEventListener("click", (e) => {
         behavior: "smooth",
     });
 });
+
+const h1 = document.querySelector("h1");
+h1.addEventListener("mouseenter", (e) => {
+    alert("addEventLister: Great! You are reading the heading");
+});
+
+h1.onmouseenter = function(e) {
+    alert("onmouseenter: Great! You are reading the heading");
+};
