@@ -6,9 +6,17 @@ const btnCloseModal = document.querySelector(".btn--close-modal");
 const btnsOpenModal = document.querySelectorAll(".btn--show-modal");
 const btnScrollTo = document.querySelector(".btn--scroll-to");
 const section1 = document.querySelector("#section--1");
+const header = document.querySelector(".header");
+const allSections = document.querySelectorAll(".section");
+const logo = document.querySelector(".nav__logo");
+const link = document.querySelector(".nav__link--btn");
+const tabs = document.querySelectorAll(".operations__tab");
+const tabsContainer = document.querySelector(".operations__tab-container");
+const tabsContent = document.querySelectorAll(".operations__content");
+const nav = document.querySelector(".nav");
 
 ///////////////////////////////////////
-// ### Modal window ###
+// ### Modal Window ###
 
 const openModal = function(e) {
     e.preventDefault();
@@ -93,21 +101,19 @@ document.querySelector(".nav__links").addEventListener("click", function(e) {
 });
 
 // ### Selecting Elements ###
-console.log(document.documentElement);
-console.log(document.head);
-console.log(document.body);
+// console.log(document.documentElement);
+// console.log(document.head);
+// console.log(document.body);
 
-const header = document.querySelector(".header");
-const allSections = document.querySelectorAll(".section");
-console.log(allSections);
+// console.log(allSections);
 
 document.getElementById("section--1");
 const allBtns = document.getElementsByTagName("button");
-console.log(allBtns);
+// console.log(allBtns);
 
-console.log(document.getElementsByClassName("btn"));
+// console.log(document.getElementsByClassName("btn"));
 
-// ### Creating and inserting elements ###
+// ### Creating and Inserting Elements ###
 const message = document.createElement("div");
 message.classList.add("cookie-message");
 // message.textContent = "We use cookies for improved functionality and analytics";
@@ -129,9 +135,9 @@ document
 message.style.backgroundColor = "#37383d";
 message.style.width = "120%";
 
-console.log(message.style.color);
-console.log(message.style.backgroundColor);
-console.log(getComputedStyle(message).height);
+// console.log(message.style.color);
+// console.log(message.style.backgroundColor);
+// console.log(getComputedStyle(message).height);
 
 message.style.height =
     Number.parseFloat(getComputedStyle(message).height, 10) + 40 + "px";
@@ -139,26 +145,24 @@ message.style.height =
 document.documentElement.style.setProperty("--color-primary", "orangered");
 
 // ### Attributes ###
-const logo = document.querySelector(".nav__logo");
-console.log(logo.alt);
-console.log(logo.src);
+// console.log(logo.alt);
+// console.log(logo.src);
 
 logo.alt = "Beautiful minimalist logo";
 
 // ### Non-standard ###
-console.log(logo.degigner); // Undefined
-console.log(logo.getAttribute("designer"));
+// console.log(logo.degigner); // Undefined
+// console.log(logo.getAttribute("designer"));
 logo.setAttribute("Company", "Bankist");
 
-console.log(logo.src);
-console.log(logo.getAttribute("src"));
+// console.log(logo.src);
+// console.log(logo.getAttribute("src"));
 
-const link = document.querySelector(".nav__link--btn");
-console.log(link.href);
-console.log(link.getAttribute("href"));
+// console.log(link.href);
+// console.log(link.getAttribute("href"));
 
-//### Data attributes ###
-console.log(logo.dataset.versionNumber);
+//### Data Attributes ###
+// console.log(logo.dataset.versionNumber);
 
 // ### Classes ###
 logo.classList.add("c", "j");
@@ -184,12 +188,9 @@ const randomInt = (min, max) =>
 
 const randomColor = () =>
     `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
-console.log(randomColor(0, 255));
+// console.log(randomColor(0, 255));
 
-// ### Tabbed component ###
-const tabs = document.querySelectorAll(".operations__tab");
-const tabsContainer = document.querySelector(".operations__tab-container");
-const tabsContent = document.querySelectorAll(".operations__content");
+// ### Tabbed Component ###
 
 // tabs.forEach((t) => t.addEventListener("click", () => console.log("TAB"))); // Bad practice
 tabsContainer.addEventListener("click", function(e) {
@@ -211,6 +212,8 @@ tabsContainer.addEventListener("click", function(e) {
         .querySelector(`.operations__content--${clicked.dataset.tab}`)
         .classList.add("operations__content--active");
 });
+
+// ### Menu Fade Animation ###
 
 // document.querySelector(".nav__link").addEventListener("click", function(e) {
 //     this.style.backgroundColor = randomColor();
