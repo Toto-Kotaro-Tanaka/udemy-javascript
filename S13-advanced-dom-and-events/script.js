@@ -168,10 +168,10 @@ logo.classList.contains("c");
 
 logo.className = "jonas"; // Do not use as it replaces all classes
 
-// const h1 = document.querySelector("h1");
-// h1.addEventListener("mouseenter", (e) => {
-//     alert("addEventLister: Great! You are reading the heading");
-// });
+const h1 = document.querySelector("h1");
+h1.addEventListener("mouseenter", (e) => {
+    alert("addEventLister: Great! You are reading the heading");
+});
 
 // Below old way
 // h1.onmouseenter = function(e) {
@@ -185,6 +185,32 @@ const randomInt = (min, max) =>
 const randomColor = () =>
     `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
 console.log(randomColor(0, 255));
+
+// ### Tabbed component ###
+const tabs = document.querySelectorAll(".operations__tab");
+const tabsContainer = document.querySelector(".operations__tab-container");
+const tabsContent = document.querySelectorAll(".operations__content");
+
+// tabs.forEach((t) => t.addEventListener("click", () => console.log("TAB"))); // Bad practice
+tabsContainer.addEventListener("click", function(e) {
+    const clicked = e.target.closest(".operations__tab");
+    // console.log(clicked);
+
+    // Guard Clause
+    if (!clicked) return;
+
+    // Active tab
+    tabs.forEach((t) => t.classList.remove("operations__tab--active"));
+    tabsContent.forEach((c) =>
+        c.classList.remove("operations__content--active"),
+    );
+    clicked.classList.add("operations__tab--active");
+
+    // Activate content area
+    document
+        .querySelector(`.operations__content--${clicked.dataset.tab}`)
+        .classList.add("operations__content--active");
+});
 
 // document.querySelector(".nav__link").addEventListener("click", function(e) {
 //     this.style.backgroundColor = randomColor();
@@ -205,30 +231,30 @@ console.log(randomColor(0, 255));
 //     console.log("Nav", e.target, e.currentTarget);
 // });
 
-const h1 = document.querySelector("h1");
+// const h1 = document.querySelector("h1");
 
 // Going downwards: child
-console.log(h1.querySelectorAll(".highlight"));
-console.log(h1.children);
+// console.log(h1.querySelectorAll(".highlight"));
+// console.log(h1.children);
 
-h1.firstElementChild.style.color = "white";
-h1.lastElementChild.style.color = "orangered";
+// h1.firstElementChild.style.color = "white";
+// h1.lastElementChild.style.color = "orangered";
 
 // Going upwards: parent
-console.log(h1.parentNode);
-console.log(h1.parentElement);
+// console.log(h1.parentNode);
+// console.log(h1.parentElement);
 
-h1.closest(".header").style.background = "var(--gradient-secondary)";
-h1.closest("h1").style.background = "var(--gradient-primary)";
+// h1.closest(".header").style.background = "var(--gradient-secondary)";
+// h1.closest("h1").style.background = "var(--gradient-primary)";
 
 // Going sideways: siblings
-console.log(h1.previousElementsSibling);
-console.log(h1.nextElementSibling);
+// console.log(h1.previousElementsSibling);
+// console.log(h1.nextElementSibling);
 
-console.log(h1.previousSibling);
-console.log(h1.nextSibling);
+// console.log(h1.previousSibling);
+// console.log(h1.nextSibling);
 
-console.log(h1.parentElement.children);
-[...h1.parentElement.children].forEach((el) => {
-    if (el !== h1) el.style.transform = "scale(0.5)";
-});
+// console.log(h1.parentElement.children);
+// [...h1.parentElement.children].forEach((el) => {
+//     if (el !== h1) el.style.transform = "scale(0.5)";
+// });
