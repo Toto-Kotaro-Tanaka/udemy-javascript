@@ -142,7 +142,7 @@ message.style.width = "120%";
 message.style.height =
     Number.parseFloat(getComputedStyle(message).height, 10) + 40 + "px";
 
-document.documentElement.style.setProperty("--color-primary", "orangered");
+// document.documentElement.style.setProperty("--color-primary", "orangered");
 
 // ### Attributes ###
 // console.log(logo.alt);
@@ -172,10 +172,10 @@ logo.classList.contains("c");
 
 logo.className = "jonas"; // Do not use as it replaces all classes
 
-const h1 = document.querySelector("h1");
-h1.addEventListener("mouseenter", (e) => {
-    alert("addEventLister: Great! You are reading the heading");
-});
+// const h1 = document.querySelector("h1");
+// h1.addEventListener("mouseenter", (e) => {
+//     alert("addEventLister: Great! You are reading the heading");
+// });
 
 // Below old way
 // h1.onmouseenter = function(e) {
@@ -214,6 +214,32 @@ tabsContainer.addEventListener("click", function(e) {
 });
 
 // ### Menu Fade Animation ###
+const handleHover = function(e) {
+    // console.log(this, e.currentTarget);
+    if (e.target.classList.contains("nav__link")) {
+        const link = e.target;
+        const siblings = link.closest(".nav").querySelectorAll(".nav__link");
+        const logo = link.closest(".nav").querySelector("img");
+
+        siblings.forEach((el) => {
+            if (el !== link) {
+                el.style.opacity = this;
+            }
+        });
+        logo.style.opacity = this;
+    }
+};
+
+// Passing "argument" into handler
+// nav.addEventListener("mouseover", function(e) {
+//     handleHover(e, 0.5);
+// });
+nav.addEventListener("mouseover", handleHover.bind(0.5));
+
+// nav.addEventListener("mouseout", function(e) {
+//     handleHover(e, 1);
+// });
+nav.addEventListener("mouseout", handleHover.bind(1));
 
 // document.querySelector(".nav__link").addEventListener("click", function(e) {
 //     this.style.backgroundColor = randomColor();
