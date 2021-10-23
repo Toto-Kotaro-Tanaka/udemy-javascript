@@ -273,7 +273,7 @@ const navHeight = nav.getBoundingClientRect().height;
 
 const stickyNav = (entries) => {
     const [entry] = entries;
-    console.log(entry);
+    // console.log(entry);
 
     if (!entry.isIntersecting) {
         nav.classList.add("sticky");
@@ -288,6 +288,27 @@ const headerObs = new IntersectionObserver(stickyNav, {
     rootMargin: `-${navHeight}px`,
 });
 headerObs.observe(header);
+
+// ### Reveal Sections ###
+const revealSection = function(entries, observer) {
+    const [entry] = entries;
+    console.log(entry);
+
+    if (!entry.isIntersecting) return;
+
+    entry.target.classList.remove("section--hidden");
+    observe.unobserve(entry.target);
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+    root: null,
+    threshold: 0.15,
+});
+
+allSections.forEach(function(section) {
+    sectionObserver.observe(section);
+    section.classList.add("section--hidden");
+});
 
 // document.querySelector(".nav__link").addEventListener("click", function(e) {
 //     this.style.backgroundColor = randomColor();
