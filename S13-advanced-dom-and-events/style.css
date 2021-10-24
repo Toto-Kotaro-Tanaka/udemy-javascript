@@ -101,6 +101,10 @@ p {
     color: #666;
 }
 
+#logo {
+    width: 25rem;
+}
+
 
 /* This is BAD for accessibility! Don't do in the real world! */
 
@@ -110,7 +114,6 @@ button:focus {
 
 img {
     transition: filter 0.5s;
-    width: 25rem;
 }
 
 .lazy-img {
