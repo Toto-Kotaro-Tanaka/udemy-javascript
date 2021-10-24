@@ -15,6 +15,10 @@ const tabsContainer = document.querySelector(".operations__tab-container");
 const tabsContent = document.querySelectorAll(".operations__content");
 const nav = document.querySelector(".nav");
 const imgTarget = document.querySelectorAll("img[data-src]");
+const slides = document.querySelectorAll(".slide");
+const slider = document.querySelector(".slider");
+const btnLeft = document.querySelector(".slider__btn--left");
+const btnRight = document.querySelector(".slider__btn--right");
 
 ///////////////////////////////////////
 // ### Modal Window ###
@@ -308,7 +312,7 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 
 allSections.forEach(function(section) {
     sectionObserver.observe(section);
-    section.classList.add("section--hidden");
+    // section.classList.add("section--hidden");
 });
 
 // ### Lazy Loading Images ###
@@ -335,6 +339,41 @@ const imagObserver = new IntersectionObserver(loadImg, {
 });
 
 imgTarget.forEach((img) => imagObserver.observe(img));
+
+// ### Slider ###
+let currentSlide = 0;
+const maxSlide = slides.length;
+
+const goToSlide = function(slide) {
+    slides.forEach(
+        (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`),
+    );
+};
+
+goToSlide(0);
+
+const nextSlide = () => {
+    if (currentSlide === maxSlide - 1) {
+        currentSlide = 0;
+    } else {
+        currentSlide++;
+    }
+
+    goToSlide(currentSlide);
+};
+
+const prevSlide = () => {
+    if (currentSlide === 0) {
+        currentSlide = maxSlide - 1;
+    } else {
+        currentSlide--;
+    }
+
+    goToSlide(currentSlide);
+};
+
+btnRight.addEventListener("click", nextSlide);
+btnLeft.addEventListener("click", prevSlide);
 
 // document.querySelector(".nav__link").addEventListener("click", function(e) {
 //     this.style.backgroundColor = randomColor();
