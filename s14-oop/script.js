@@ -76,3 +76,28 @@ Array.prototype.unique = function() {
 console.log(arr.unique());
 
 const h1 = document.querySelector("h1");
+
+// ### Challenge ###
+
+const Car = function(make, speed) {
+    this.make = make;
+    this.speed = speed;
+
+    console.log(`"${this.make}" is going at ${speed} km`);
+};
+
+const bmw = new Car("BMW", 120);
+const mercedes = new Car("Mercedes", 95);
+
+Car.prototype.accelerate = function() {
+    console.log(`"${this.make}" is going at ${this.speed + 10} km`);
+};
+
+Car.prototype.brake = function() {
+    console.log(`"${this.make}" is going at ${this.speed - 10} km`);
+};
+
+bmw.accelerate();
+bmw.brake();
+mercedes.accelerate();
+mercedes.brake();
