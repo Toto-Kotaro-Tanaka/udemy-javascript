@@ -29,3 +29,50 @@ const jay = "Jay";
 
 console.log(jonas instanceof Person); // true
 console.log(jay instanceof Person); // false
+
+console.log(Person.prototype);
+
+// Prototypes
+Person.prototype.calcAge = function() {
+    console.log(`This is ${this.firstName}'s age: ${2037 - this.birthYear}`);
+};
+
+jonas.calcAge();
+mathilde.calcAge();
+jack.calcAge();
+
+console.log(jonas.__proto__);
+console.log(jonas.__proto__ === Person.prototype); // true
+console.log(mathilde.__proto__ === Person.prototype); // true
+console.log(`this is false: ${Person.prototype === Person}`); // false
+
+// prototype is not === Person. It should have been called ".prototypeOfLinkedObjects" or something like this.
+
+console.log(Person.prototype.isPrototypeOf(jonas)); // true
+
+Person.prototype.species = "Home Sapiens";
+console.log(jonas, mathilde);
+console.log(jonas.species, mathilde.species);
+
+console.log(jonas.hasOwnProperty("firstName")); // true
+console.log(jonas.hasOwnProperty("species")); // false because it is not direct object
+
+console.log(jonas.__proto__);
+console.log(jonas.__proto__.__proto__); // Object.prototype (Top of prototype chain)
+console.log(jonas.__proto__.__proto__.__proto__);
+
+console.dir(Person.prototype.constructor);
+
+const arr = [3, 6, 8, 6, 4, 8]; // new Array === []
+console.log(arr.__proto__); // Each array inherits array methods
+console.log(arr.__proto__ === Array.prototype); // true
+console.log(arr.__proto__.__proto__);
+console.log(arr.__proto__.__proto__.__proto__);
+
+Array.prototype.unique = function() {
+    return [...new Set(this)];
+};
+
+console.log(arr.unique());
+
+const h1 = document.querySelector("h1");
