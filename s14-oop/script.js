@@ -101,3 +101,45 @@ bmw.accelerate();
 bmw.brake();
 mercedes.accelerate();
 mercedes.brake();
+
+// ES6 Classes JS
+
+// Class expression
+const PersonCl1 = class {};
+
+// Class declaration
+class PersonCl {
+    constructor(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+
+    // Method will be added to .prototype property
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    }
+
+    greet1() {
+        console.log(`Hey, ${this.firstName}, how are you?`);
+    }
+}
+// This is same as greet1 function above
+PersonCl.prototype.greet2 = function() {
+    console.log(`Hey, ${this.firstName}, how are you?`);
+};
+
+const jessica = new PersonCl("Jessica", 1994);
+jessica.calcAge();
+
+console.log(jessica.__proto__ === PersonCl.prototype); // true
+
+jessica.greet1();
+jessica.greet2();
+
+/* 
+1. Classes are NOT hoisted
+2. Classes are first-class citizens
+3. Classes are executed in strict mode
+*/
+
+// Constructor vs Class? - personal preference but if you use Class, it's important to understand concept of constructor
