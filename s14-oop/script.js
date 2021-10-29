@@ -84,7 +84,7 @@ console.log(arr.unique());
 
 const h1 = document.querySelector("h1");
 
-// ### Challenge ###
+// ### Challenge 1 ###
 
 const Car = function(make, speed) {
     this.make = make;
@@ -218,3 +218,44 @@ console.log(steven.__proto__ === PersonProto);
 const sarah = Object.create(PersonProto);
 sarah.init("Sarah", 1991);
 sarah.calcAge();
+
+// ### Challenge 2 ###
+class CarCl {
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+
+    accelerate() {
+        this.speed += 10;
+        console.log(`"${this.make}" is going at ${this.speed} km`);
+    }
+
+    brake() {
+        this.speed -= 10;
+        console.log(`"${this.make}" is going at ${this.speed} km`);
+    }
+
+    get speedUS() {
+        return this.speed / 1.6;
+    }
+
+    set speedUS(speed) {
+        this.speed = speed * 1.6;
+    }
+}
+
+const bmwx1 = new CarCl("BMW X1", 120);
+bmwx1.accelerate();
+bmwx1.accelerate();
+bmwx1.accelerate();
+
+bmwx1.brake();
+bmwx1.brake();
+
+const mazda = new CarCl("Mazda", 220);
+mazda.accelerate();
+
+console.log(mazda.speedUS);
+mazda.speedUS = 220;
+console.log(mazda.speedUS);
