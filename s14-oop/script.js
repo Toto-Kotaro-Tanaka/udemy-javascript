@@ -29,8 +29,15 @@ const jay = "Jay";
 
 console.log(jonas instanceof Person); // true
 console.log(jay instanceof Person); // false
-
 console.log(Person.prototype);
+
+// Static Method
+Person.hey = function() {
+    console.log("Hey there 🙂");
+    console.log(this); // Entire object
+};
+
+Person.hey();
 
 // Prototypes
 Person.prototype.calcAge = function() {
@@ -138,6 +145,10 @@ class PersonCl {
     get fullName() {
         return this._fullName;
     }
+
+    static hey() {
+        console.log("Hey there 🙂");
+    }
 }
 // This is same as greet1 function above
 PersonCl.prototype.greet2 = function() {
@@ -152,7 +163,9 @@ console.log(jessica.__proto__ === PersonCl.prototype); // true
 jessica.greet1();
 jessica.greet2();
 
-const walter = new PersonCl("Walter", 1965);
+const walter = new PersonCl("Walter White", 1965);
+
+PersonCl.hey();
 
 /* 
 1. Classes are NOT hoisted
@@ -181,3 +194,27 @@ console.log(account.latest);
 
 account.latest = 50;
 console.log(account.movements);
+
+// Object.create - least used
+const PersonProto = {
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    },
+
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    },
+};
+
+const steven = Object.create(PersonProto);
+steven.name = "Steven";
+steven.birthYear = 1988;
+console.log(steven);
+steven.calcAge();
+
+console.log(steven.__proto__ === PersonProto);
+
+const sarah = Object.create(PersonProto);
+sarah.init("Sarah", 1991);
+sarah.calcAge();
