@@ -109,8 +109,8 @@ const PersonCl1 = class {};
 
 // Class declaration
 class PersonCl {
-    constructor(firstName, birthYear) {
-        this.firstName = firstName;
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
         this.birthYear = birthYear;
     }
 
@@ -122,19 +122,37 @@ class PersonCl {
     greet1() {
         console.log(`Hey, ${this.firstName}, how are you?`);
     }
+
+    get age() {
+            return 2037 - this.birthYear;
+        }
+        // Set a property that already exists
+    set fullName(name) {
+        if (name.includes(" ")) {
+            this._fullName = name;
+        } else {
+            alert(`${name} is not a full name`);
+        }
+    }
+
+    get fullName() {
+        return this._fullName;
+    }
 }
 // This is same as greet1 function above
 PersonCl.prototype.greet2 = function() {
     console.log(`Hey, ${this.firstName}, how are you?`);
 };
 
-const jessica = new PersonCl("Jessica", 1994);
+const jessica = new PersonCl("Jessica Davis", 1994);
 jessica.calcAge();
-
+console.log(jessica.age);
 console.log(jessica.__proto__ === PersonCl.prototype); // true
 
 jessica.greet1();
 jessica.greet2();
+
+const walter = new PersonCl("Walter", 1965);
 
 /* 
 1. Classes are NOT hoisted
@@ -143,3 +161,23 @@ jessica.greet2();
 */
 
 // Constructor vs Class? - personal preference but if you use Class, it's important to understand concept of constructor
+
+// Getters and Setters are called assessor properties and others normal properties
+
+const account = {
+    owner: "Jonas",
+    movements: [200, 350, 3520, 400],
+
+    get latest() {
+        return this.movements.slice(-1).pop();
+    },
+
+    set latest(mov) {
+        return this.movements.push(mov);
+    },
+};
+
+console.log(account.latest);
+
+account.latest = 50;
+console.log(account.movements);
