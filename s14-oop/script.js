@@ -342,3 +342,65 @@ tesla.accelerateEV();
 tesla.accelerateEV();
 tesla.accelerateEV();
 tesla.accelerateEV();
+
+// ES6 Classes inheritance
+class PersonInheri {
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+    }
+
+    // Method will be added to .prototype property
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    }
+
+    greet1() {
+        console.log(`Hey, ${this.firstName}, how are you?`);
+    }
+
+    get age() {
+        return 2037 - this.birthYear;
+    }
+
+    set fullName(name) {
+        if (name.includes(" ")) {
+            this._fullName = name;
+        } else {
+            alert(`${name} is not a full name`);
+        }
+    }
+
+    get fullName() {
+        return this._fullName;
+    }
+
+    static hey() {
+        console.log("Hey there 🙂");
+    }
+}
+
+class StudentInhe extends PersonInheri {
+    constructor(fullName, birthYear, course) {
+        super(fullName, birthYear); // Constructor of parent function and always need to happen first!
+        this.course = course;
+    }
+
+    introduce() {
+        console.log(
+            `My name is ${this.fullName} and I'm taking ${this.course}`,
+        );
+    }
+
+    calcAge() {
+        console.log(
+            `I'm ${2037 - this.birthYear} and I feel like more ${
+                2037 - this.birthYear + 10
+            }`,
+        );
+    }
+}
+
+const marta = new StudentInhe("Marta Jones", 2021, "Computer Science");
+marta.introduce();
+marta.calcAge();
