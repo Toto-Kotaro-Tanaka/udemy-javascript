@@ -259,3 +259,43 @@ mazda.accelerate();
 console.log(mazda.speedUS);
 mazda.speedUS = 220;
 console.log(mazda.speedUS);
+
+// Inheritance Between "Classes" : Constructor Functions
+const PersonInhe = function(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+};
+
+PersonInhe.prototype.calcAge = function() {
+    console.log(2037 - this.birthYear);
+};
+
+const Student = function(firstName, birthYear, course) {
+    PersonInhe.call(this, firstName, birthYear); // Use call method
+    // this.firstName = firstName; // Use above instead of this.
+    // this.birthYear = birthYear; // Use above instead of this.
+    this.course = course;
+};
+
+// Linking prototype
+Student.prototype = Object.create(PersonInhe.prototype);
+// Student.prototype = PersonInhe.prototype // This is not what we want. Student.prototype should inherit Person.prototype and not to be equal
+
+Student.prototype.introduce = function() {
+    console.log(`Hi, my name is ${this.firstName} and I study ${this.course}`);
+};
+
+const mike = new Student("Mike", 2020, "Computer Science");
+console.log(mike);
+mike.introduce();
+mike.calcAge();
+
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+
+console.log(mike instanceof Student);
+console.log(mike instanceof PersonInhe);
+console.log(mike instanceof Object);
+
+Student.prototype.constructor = Student; // To fix mike is bing Student object
+console.dir(Student.prototype.constructor);
