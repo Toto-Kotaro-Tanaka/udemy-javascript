@@ -97,11 +97,21 @@ const bmw = new Car("BMW", 120);
 const mercedes = new Car("Mercedes", 95);
 
 Car.prototype.accelerate = function() {
-    console.log(`"${this.make}" is going at ${this.speed + 10} km`);
+    this.speed += 10;
+    console.log(`"${this.make}" is going at ${this.speed} km`);
 };
 
 Car.prototype.brake = function() {
-    console.log(`"${this.make}" is going at ${this.speed - 10} km`);
+    this.speed -= 5;
+    console.log(`"${this.make}" is going at ${this.speed} km`);
+};
+
+Car.prototype.accelerateCar = function() {
+    this.speed += 20;
+    this.charge -= 1;
+    console.log(
+        `${this.make} is going at ${this.speed} and battery is ${this.charge}`,
+    );
 };
 
 bmw.accelerate();
@@ -299,3 +309,36 @@ console.log(mike instanceof Object);
 
 Student.prototype.constructor = Student; // To fix mike is bing Student object
 console.dir(Student.prototype.constructor);
+
+// ### Challenge 3 ###
+const EV = function(make, speed, charge) {
+    Car.call(this, make, speed);
+    this.charge = charge;
+    console.log(make, speed, charge);
+};
+
+EV.prototype = Object.create(Car.prototype);
+EV.prototype.constructor = EV;
+
+EV.prototype.chargeBattery = function(chargeTo) {
+    this.charge = chargeTo;
+};
+
+EV.prototype.accelerateEV = function() {
+    this.speed += 20;
+    this.charge -= 1;
+    console.log(
+        `${this.make} is going at ${this.speed} and battery is ${this.charge}`,
+    );
+};
+
+EV.prototype.constructor = EV;
+
+const tesla = new EV("Tesla", 120, 23);
+// tesla.chargeBattery(90);
+console.log(tesla);
+tesla.brake();
+tesla.accelerateEV();
+tesla.accelerateEV();
+tesla.accelerateEV();
+tesla.accelerateEV();
