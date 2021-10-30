@@ -404,3 +404,36 @@ class StudentInhe extends PersonInheri {
 const marta = new StudentInhe("Marta Jones", 2021, "Computer Science");
 marta.introduce();
 marta.calcAge();
+
+// Object.create inheritance
+const PersonProtoInhe = {
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    },
+
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    },
+};
+
+const stevo = Object.create(PersonProtoInhe);
+
+const StudentProto = Object.create(PersonProtoInhe);
+
+StudentProto.init = function(firstName, birthYear, course) {
+    PersonProtoInhe.init.call(this, firstName, birthYear, course);
+    this.course = course;
+};
+
+StudentProto.introduce = function() {
+    console.log(
+        `Hi, my name is ${this.firstName}, I'm ${
+            2037 - this.birthYear
+        } age and taking ${this.course}`,
+    );
+};
+
+const jayi = Object.create(StudentProto);
+jayi.init("Jay", 1996, "Computer Engineering");
+jayi.introduce();
