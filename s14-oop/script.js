@@ -238,12 +238,17 @@ class CarCl {
 
     accelerate() {
         this.speed += 10;
-        console.log(`"${this.make}" is going at ${this.speed} km`);
+        this.charge -= 1;
+        console.log(
+            `"${this.make}" is going at ${this.speed} km and ${this.charge}`,
+        );
+        return this;
     }
 
     brake() {
         this.speed -= 10;
         console.log(`"${this.make}" is going at ${this.speed} km`);
+        return this;
     }
 
     get speedUS() {
@@ -322,6 +327,7 @@ EV.prototype.constructor = EV;
 
 EV.prototype.chargeBattery = function(chargeTo) {
     this.charge = chargeTo;
+    return this;
 };
 
 EV.prototype.accelerateEV = function() {
@@ -564,3 +570,20 @@ account2
     .withdraw(4000);
 
 console.log(account2.getMovements());
+
+// ### Challenge 4 ###
+class EVCL extends CarCl {
+    constructor(make, speed, charge) {
+        super(make, speed);
+        this.charge = charge;
+    }
+
+    chargeBattery(chargeTo) {
+        this.charge = chargeTo;
+        return this;
+    }
+}
+
+const rivian = new EVCL("Rivian", 120, 23);
+
+rivian.accelerate().accelerate().brake().brake().accelerate();
