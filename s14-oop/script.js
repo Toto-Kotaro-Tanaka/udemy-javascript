@@ -437,3 +437,49 @@ StudentProto.introduce = function() {
 const jayi = Object.create(StudentProto);
 jayi.init("Jay", 1996, "Computer Engineering");
 jayi.introduce();
+
+// Another Class Example
+
+class Account {
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        this.pin = pin;
+        this.movements = []; // Not taking argument but possible to set variable
+        this.locale = navigator.language;
+
+        console.log(`Thanks for opening an account, ${this.owner}`);
+    }
+
+    deposit(val) {
+        this.movements.push(val);
+    }
+
+    withdraw(val) {
+        this.deposit(-val);
+    }
+
+    approveLoan(val) {
+        return true;
+    }
+
+    requestLoan(val) {
+        if (this.approveLoan(val)) {
+            this.deposit(val);
+            console.log(`Loan approved`);
+        }
+    }
+}
+
+const account1 = new Account("Jonas", "€", 1234);
+console.log(account1);
+
+account1.movements.push(200); // This is not a good practice. Create a method
+account1.movements.push(-140); // This is not a good practice. Create a method
+console.log(account1);
+
+account1.deposit(250);
+account1.withdraw(140);
+account1.approveLoan(1000);
+account1.requestLoan(1000);
+console.log(account1);
