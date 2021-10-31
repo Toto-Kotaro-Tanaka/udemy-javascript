@@ -444,7 +444,7 @@ class Account {
     constructor(owner, currency, pin) {
         this.owner = owner;
         this.currency = currency;
-        this.pin = pin;
+        this._pin = pin;
         this._movements = []; // Not taking argument but possible to set variable
         this.locale = navigator.language;
 
@@ -464,12 +464,12 @@ class Account {
         this.deposit(-val);
     }
 
-    approveLoan(val) {
+    _approveLoan(val) {
         return true;
     }
 
     requestLoan(val) {
-        if (this.approveLoan(val)) {
+        if (this._approveLoan(val)) {
             this.deposit(val);
             console.log(`Loan approved`);
         }
@@ -485,10 +485,69 @@ console.log(account1);
 
 account1.deposit(250);
 account1.withdraw(140);
-account1.approveLoan(1000); // This shouldn't be accessed by anyone. Should only be a part of requestLoan method.
+account1._approveLoan(1000); // This shouldn't be accessed by anyone. Should only be a part of requestLoan method.
 account1.requestLoan(1000);
 console.log(account1);
 
 // Encapsulation: Protected Properties and Methods
 // Use _ (underscore) for the property should be protected
 console.log(account1.getMovements());
+
+// Private Classes
+
+// 1) Public Fields
+// 2) Private Fields
+// 3) Public Methods
+// 4) Private Methods
+// (There is also the static version)
+
+class AccountP {
+    // 1) Public Fields (instances)
+    locale = navigator.language;
+
+    // 2) Private Fields
+    _movements = []; // Use # instead of _, issue of saving # so _ is still used
+
+    _pin;
+
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        this._pin = pin;
+        this._movements = [];
+        this.locale = navigator.language;
+
+        console.log(`Thanks for opening an account, ${this.owner}`);
+    }
+
+    getMovements() {
+        return this._movements;
+    }
+
+    deposit(val) {
+        this._movements.push(val);
+    }
+
+    withdraw(val) {
+        this.deposit(-val);
+    }
+
+    requestLoan(val) {
+        if (this._approveLoan(val)) {
+            this.deposit(val);
+            console.log(`Loan approved`);
+        }
+    }
+
+    // Private methods - Use #
+    _approveLoan(val) {
+        return true;
+    }
+}
+
+const account2 = new AccountP("Jonas", "EUR", 1234);
+account2.deposit(140);
+account2.withdraw(24);
+account2.requestLoan(1000);
+console.log(account2.getMovements());
+console.log(account2);
