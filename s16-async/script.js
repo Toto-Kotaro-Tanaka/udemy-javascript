@@ -100,5 +100,27 @@ const getCountryAndNeighbour = function (country) {
 getCountryAndNeighbour("usa");
 */
 
-const request = fetch(`https://restcountries.com/v2/name/portugal`);
-console.log(request);
+// const request = fetch(`https://restcountries.com/v2/name/portugal`);
+// console.log(request);
+
+// const getCountryData = function (country) {
+//     fetch(`https://restcountries.com/v2/name/${country}`)
+//         .then((response) => {
+//             console.log(response);
+//             return response.json();
+//         })
+//         .then((data) => {
+//             console.log(data);
+//             renderCountry(data[0]);
+//         });
+// };
+
+// getCountryData("portugal");
+
+const getCountryData = (country) => {
+    fetch(`https://restcountries.com/v2/name/${country}`)
+        .then((response) => response.json())
+        .then((data) => renderCountry(data[0]));
+};
+
+getCountryData("portugal");
