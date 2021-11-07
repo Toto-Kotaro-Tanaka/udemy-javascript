@@ -59,7 +59,12 @@ const renderCountry = function (data, className = "") {
             `;
 
     countriesContainer.insertAdjacentHTML("beforeend", html);
-    countriesContainer.style.opacity = 1;
+    // countriesContainer.style.opacity = 1;
+};
+
+const renderError = (msg) => {
+    countriesContainer.insertAdjacentText("beforeend", msg);
+    // countriesContainer.style.opacity = 1;
 };
 
 /*
@@ -129,7 +134,18 @@ const getCountryData = (country) => {
             return fetch(`https://restcountries.com/v2/alpha/${neighbour}`);
         })
         .then((response) => response.json())
-        .then((data) => renderCountry(data, "neighbour"));
+        .then((data) => renderCountry(data, "neighbour"))
+        .catch((err) => {
+            // To catch errors happening anywhere and catch returns promise
+            console.log(`Error ${err} 🤯`);
+            renderError(`Something went wrong... ${err.message}. Try again!`);
+        })
+        .finally(() => {
+            // Always happens (e.g. spinner). then = only when promise is fulfilled, catch = only when promise isn't fulfilled
+            countriesContainer.style.opacity = 1;
+        });
 };
 
-getCountryData("france");
+btn.addEventListener("click", () => {
+    getCountryData("france");
+});
