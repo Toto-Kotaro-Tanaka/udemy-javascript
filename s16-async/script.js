@@ -59,12 +59,12 @@ const renderCountry = function (data, className = "") {
             `;
 
     countriesContainer.insertAdjacentHTML("beforeend", html);
-    // countriesContainer.style.opacity = 1;
+    countriesContainer.style.opacity = 1;
 };
 
 const renderError = function (msg) {
     countriesContainer.insertAdjacentText("beforeend", msg);
-    // countriesContainer.style.opacity = 1;
+    countriesContainer.style.opacity = 1;
 };
 
 const getJSON = function (url, errorMsg = "Something went wrong") {
@@ -159,4 +159,31 @@ btn.addEventListener("click", function () {
     getCountryData("portugal");
 });
 
-getCountryData("japan");
+// getCountryData("japan");
+
+// Coding challenge 1
+
+const whereAmI = function (lat, lng) {
+    fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+        .then((response) => {
+            if (!response) {
+                throw new Error(`Problem with geocodeing ${res.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log(`Your are in ${data.city}, ${data.country}`);
+            return fetch(
+                `https://restcountries.com/v2/name/${data.country}`,
+            ).then((res) => {
+                if (!res.ok) {
+                    throw new Error(`Country not found ${res.status}`);
+                }
+                return res.json();
+            });
+        })
+        .then((data) => renderCountry(data[0]))
+        .catch((error) => console.log(`Error: ${error.message}`));
+};
+
+whereAmI(52.508, 13.381);
