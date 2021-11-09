@@ -196,9 +196,8 @@ console.log("Test Start"); // 1
 setTimeout(() => console.log("0 sec timer"), 0); // 4 because it is put in call back queue
 
 Promise.resolve("Resolved Promise 1").then((res) => console.log(res)); // 3 because it is put in microtasks queue
-
 Promise.resolve("Resolved promise 2").then((res) => {
-    for (let i = 0; i < 1000000000000; i++) {} // This makes delay to console.log(res) below and until this microtasks finishes, setTimeout console.log wont'be executed
+    for (let i = 0; i < 100; i++) {} // This makes delay to console.log(res) below and until this microtasks finishes, setTimeout console.log wont'be executed
     console.log(res);
 });
 
