@@ -20,3 +20,25 @@ add("apple", 56);
 add("bread", 9);
 
 console.log(cart); // Import is not a copy of export, that's why there are objects in the array
+
+// console.log("Start Fetching");
+// const respo = await fetch("https://jsonplaceholder.typicode.com/posts"); // This blocks the execution
+// const data = await respo.json();
+// console.log(data);
+// console.log("Somthing");
+
+const getLastPost = async function () {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const data = await res.json();
+    console.log(data);
+
+    return { title: data[0].title, text: data[0].body };
+};
+
+const lastPost = getLastPost();
+console.log(lastPost);
+
+// lastPost.then((last) => console.log(last));
+
+// const lastPost2 = await getLastPost();
+// console.log(lastPost2);
