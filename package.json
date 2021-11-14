@@ -1,0 +1,23 @@
+{
+  "name": "udemy-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Toto-Kotaro-Tanaka/udemy-javascript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Toto-Kotaro-Tanaka/udemy-javascript/issues"
+  },
+  "homepage": "https://github.com/Toto-Kotaro-Tanaka/udemy-javascript#readme",
+  "dependencies": {
+    "leaflet": "^1.7.1",
+    "lodash-es": "^4.17.21"
+  }
+}
