@@ -72,3 +72,15 @@ const ShoppingCart2 = (function () {
 
 ShoppingCart2.addToCart("apple", 2);
 ShoppingCart2.addToCart("pizza", 3);
+
+// Common JS Modules
+// Export
+// export.addToCart2 = function (product, quantity) {
+//         cart.push({ product, quantity });
+//         console.log(
+//             `This is shopping cart 2: ${quantity} ${product} added to cart`,
+//         );
+//     };
+
+// Import
+// const { addToCart2 } = require("./shoppingCart.js")
